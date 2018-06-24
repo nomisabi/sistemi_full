@@ -1,0 +1,88 @@
+<div class="col-md-12">
+    <nav class="navbar navbar-expand-lg bg-info">
+      <div class="container">
+        <div class="navbar-translate">
+          <a class="navbar-brand" (click)="goToHome()">{{username}}</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a (click)="goToDiseases()" class="nav-link">DISEASES</a>
+                </li>  
+              <li class="nav-item">
+                  <a (click)="goToPatients()" class="nav-link">PATIENTS</a>
+                </li>  
+              <li class="nav-item">
+                  <a (click)="goToMonitoring()" class="nav-link">Monitoring</a>
+                </li>  
+              <li class="nav-item">
+                  <a (click)="goToReports()" class="nav-link">Reports</a>
+                </li>  
+            <li class="nav-item">
+              <a (click)="logout()" class="nav-link">Log out</a>
+            </li>            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header card-header-info">
+                      <h4 class="card-title">Edit Profile</h4>
+                      <p class="card-category">Complete your profile</p>
+                  </div>
+                  <div class="card-body">
+                      <form action="update()">
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput  placeholder="Username (disabled)" disabled [(ngModel)]="user.username" name="usern">
+                                  </mat-form-field>
+                              </div>
+                              
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput  placeholder="Email address" type="email" [(ngModel)]="user.email" name="email">
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput  placeholder="Fist Name" type="text" [(ngModel)]="user.firstname" name="first">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput  placeholder="Last Name" type="text" [(ngModel)]="user.lastname" name="last">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput   placeholder="Skills" type="text" [(ngModel)]="user.skill" name="skill" >
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="update()">Update Profile</button>
+                          <button mat-raised-button  class="btn btn-info pull-right" (click)="goToPass()" >Change Password</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        </div>
+      </div>
+  </div>

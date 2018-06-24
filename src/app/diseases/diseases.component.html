@@ -1,0 +1,280 @@
+<div class="col-md-12">
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container">
+          <div class="navbar-translate">
+            <a class="navbar-brand" (click)="goToHome()">{{username}}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a (click)="goToDiseases()" class="nav-link">DISEASES</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToPatients()" class="nav-link">PATIENTS</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToMonitoring()" class="nav-link">Monitoring</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToReports()" class="nav-link">Reports</a>
+                  </li>  
+              <li class="nav-item">
+                <a (click)="logout()" class="nav-link">Log out</a>
+              </li>            
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+        <div class="section section-white">
+          <div class="container">
+                <div class="card">
+                        <div class="card-header card-header-tabs card-header-info">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <span class="nav-tabs-title">Reports:</span>
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="nav-item" *ngIf="active==1 || active==5">
+                                            <a mat-button class="nav-link active" (click)="goToTab(1)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Diseases
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active!=1 && active!=5">
+                                            <a mat-button class="nav-link" (click)="goToTab(1)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Diseases
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active==2 || active==6">
+                                            <a mat-button class="nav-link active" (click)="goToTab(2)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Find disease by symptoms
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active!=2 && active!=6">
+                                            <a mat-button class="nav-link" (click)="goToTab(2)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Find disease by symptoms
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active==3 || active==7">
+                                            <a mat-button class="nav-link active" (click)="goToTab(3)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Find symptoms by disease
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active!=3 && active!=7">
+                                            <a mat-button class="nav-link" (click)="goToTab(3)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> ind symptoms by disease
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                    
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" [ngSwitch]="active">
+                            <div class="tab-content" >
+                                
+                                <div class="tab-pane active" *ngSwitchCase="2">
+                                        <br/>
+                                        <div class="row">
+                                                Symptoms:
+                                                <div class="col-md-6">
+                                                        
+                                                        <p *ngFor="let symp of selectedSymptoms">
+                                                            {{symp.name}}
+                                                            <i class="material-icons" (click)="removeSymp(symp)">close</i>
+                                                        </p>
+                                                        <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="searchSymp()">Search</button>
+                                        
+                                                </div>
+                                                <div class="col-md-5">
+                                                        <mat-form-field class="example-full-width" >
+                                                                <mat-select placeholder="Symptoms" name="symp" [(ngModel)]="selectedSymptom" >
+                                                                    <mat-option *ngFor="let s of symptoms" [value]="s" >{{s.name}}</mat-option>
+                                                                </mat-select>    
+                                                            </mat-form-field>
+                                                            <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="add()">Add</button>
+                                        
+                                                </div>
+                                            
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="card card-plain">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title mt-0">Find disease by symptoms </h4>
+                                                    
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                                <thead class="">
+                                                                        <th>
+                                                                            ID
+                                                                        </th>
+                                                                        <th>
+                                                                            Name
+                                                                        </th>
+                                                                        <th>
+                                                                            Category
+                                                                        </th>
+                                                                        <th>
+                                                                            Symptoms
+                                                                        </th>
+                                                                       
+                                                        
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr *ngFor="let dis of symp_diseases">
+                                                                            <td>
+                                                                                {{dis.id}}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{dis.name}}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{dis.category}}
+                                                                            </td>
+                                                                            <td>
+                                                                                <p *ngIf="dis.temperatureMin!=0 || dis.temperatureMax!=0">Temperature
+                                                                                <span *ngIf="dis.temperatureMin!=0"> {{dis.temperatureMin}}</span> - 
+                                                                                <span *ngIf="dis.temperatureMin!=0"> {{dis.temperatureMax}}</span>
+                                                                                 </p>
+                                                                                 <p *ngFor="let sym of dis.simptons">{{sym.name}} </p>
+                                                                            </td>
+                                                                         
+                                                                        </tr>
+                                                                    </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="tab-pane active" *ngSwitchCase="1">
+                                        <br/>
+                                        <div class="col-md-12">
+                                            <div class="card card-plain">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title mt-0"> Diseases </h4>
+                                                    <p class="card-category"></p>                                          
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead class="">
+                                                                <th>
+                                                                    ID
+                                                                </th>
+                                                                <th>
+                                                                    Name
+                                                                </th>
+                                                                <th>
+                                                                    Category
+                                                                </th>
+                                                                <th>
+                                                                    Symptoms
+                                                                </th>
+                                                               
+                                                
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let dis of diseases">
+                                                                    <td>
+                                                                        {{dis.id}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{dis.name}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{dis.category}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <p *ngIf="dis.temperatureMin!=0 || dis.temperatureMax!=0">Temperature
+                                                                        <span *ngIf="dis.temperatureMin!=0"> {{dis.temperatureMin}}</span> - 
+                                                                        <span *ngIf="dis.temperatureMax!=0"> {{dis.temperatureMax}}</span>
+                                                                         </p>
+                                                                         <p *ngFor="let sym of dis.simptons">{{sym.name}} </p>
+                                                                    </td>
+                                                                 
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="tab-pane active" *ngSwitchCase="3">
+                                    <br/>
+                                        <div class="col-md-12">
+                                                <div class="col-md-8">
+                                                        <mat-form-field class="example-full-width" >
+                                                                <mat-select placeholder="Diseases" name="dis" [(ngModel)]="selectedDisease" >
+                                                                    <mat-option *ngFor="let d of diseases" [value]="d" >{{d.name}}</mat-option>
+                                                                </mat-select>    
+                                                            </mat-form-field>
+                                                            <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="searchDis()">Search</button>
+                                        
+                                                </div>
+                                            <div class="card card-plain">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title mt-0"> Find symptoms by disease</h4>
+                                                    
+                                             
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead class="">
+                                                                <th>
+                                                                    ID
+                                                                </th>
+                                                                <th>
+                                                                    Name
+                                                                </th>
+                                                                <th>
+                                                                    Specific
+                                                                </th>
+                                                               
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let med of dis_symptoms">
+                                                                    <td>
+                                                                        {{med.id}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{med.name}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{med.specific}}
+                                                                    </td>
+                                                                    
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            <!--                 nav pills -->
+          
+            <!--                 end nav pills -->
+          </div>
+        </div>
+      </div>

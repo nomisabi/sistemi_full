@@ -1,0 +1,401 @@
+<div class="col-md-12">
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container">
+          <div class="navbar-translate">
+            <a class="navbar-brand" (click)="goToHome()">{{username}}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a (click)="goToDiseases()" class="nav-link">DISEASES</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToPatients()" class="nav-link">PATIENTS</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToMonitoring()" class="nav-link">Monitoring</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToReports()" class="nav-link">Reports</a>
+                  </li>  
+              <li class="nav-item">
+                <a (click)="logout()" class="nav-link">Log out</a>
+              </li>            
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+        <div class="section section-white">
+          <div class="container">
+                <div class="card">
+                        <div class="card-header card-header-tabs card-header-info">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <span class="nav-tabs-title">Reports:</span>
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="nav-item" *ngIf="active==1 || active==3">
+                                            <a mat-button class="nav-link active" (click)="goToTab(1)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Patients
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active!=1 && active!=3">
+                                            <a mat-button class="nav-link" (click)="goToTab(1)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Patients
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active==2 || active==6">
+                                            <a mat-button class="nav-link active" (click)="goToTab(2)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Medical examinations
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active!=2 && active!=6">
+                                            <a mat-button class="nav-link" (click)="goToTab(2)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Medical examinations
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        
+                    
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" [ngSwitch]="active">
+                            <div class="tab-content" >
+                                
+                                <div class="tab-pane active" *ngSwitchCase="1">
+                                        <br/>
+                                        <div class="col-md-12">
+                                            <div class="card card-plain">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title mt-0">Patients <button mat-raised-button  class="btn btn-info pull-right" (click)="goToTab(3)" style="float: right;" ><i  class="material-icons" >add_circle</i> New</button>                                                    </h4>
+                                                    
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead class="">
+                                                                
+                                                                <th>
+                                                                    FirstName
+                                                                </th>
+                                                                <th>
+                                                                    Lastname
+                                                                </th>
+                                                                <th>
+                                                                    Delete
+                                                                </th>
+                                                                
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let user of patients">
+
+                                                                    <td>
+                                                                        {{user.firstName}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{user.lastName}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <i class="material-icons" (click)="deletePatient(user)">delete</i>
+                                                                    </td>
+                                                                    
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="tab-pane active" *ngSwitchCase="2">
+                                        <br/>
+                                        <div class="col-md-12">
+                                            <div class="card card-plain">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title mt-0"> Medical Examinations <button mat-raised-button  class="btn btn-info pull-right" (click)="goToTab(4)" style="float: right;" ><i  class="material-icons" >add_circle</i> New</button> </h4>
+                                                    <p class="card-category"></p>                                          
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead class="">
+                                                                <th>
+                                                                    ID
+                                                                </th>
+                                                                <th>
+                                                                    Date
+                                                                </th>
+                                                                <th>
+                                                                    Healed
+                                                                </th>
+                                                                <th>
+                                                                    Patient
+                                                                </th>
+                                                                
+                                                               
+                                                
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let ex of examinations">
+                                                                    <td>
+                                                                        {{ex.id}}
+                                                                    </td>
+                                                                    <td *ngIf="!ex.diagnosis">
+                                                                            <button mat-raised-button  class="btn btn-info pull-right" (click)="diagnos(ex)" ><i  class="material-icons" >add_circle</i> Add diagnosis</button>
+                                                                    </td>
+                                                                    <td *ngIf="!ex.diagnosis">
+                                                                        
+                                                                    </td>
+                                                                    <td *ngIf="ex.diagnosis">
+                                                                            {{ex.diagnosis?.dateOfDiagnosis}}
+                                                                    </td>
+                                                                    <td *ngIf="ex.diagnosis">
+                                                                        <p *ngIf="ex.diagnosis.healed">
+                                                                            {{ex.diagnosis?.dateOfHealing}}
+                                                                        </p>
+                                                                        <p *ngIf="!ex.diagnosis.healed"> <button mat-raised-button  class="btn btn-info pull-right" (click)="heal(ex)" ><i  class="material-icons" >add_circle</i> Healed</button></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ex.patient.firstName}}  {{ex.patient.lastName}}
+                                                                    </td>
+
+                                                                 
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="tab-pane active" *ngSwitchCase="3">
+                                    <div class="card">
+                                        <div class="card-header card-header-info">
+                                            <h4 class="card-title">New patient</h4>
+                                        </div>
+                                        <div class="card-body">
+                                          Create new patient
+                                            <form action="save()">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                      <mat-form-field class="example-full-width">
+                                                          <input matInput placeholder="First Name"  [(ngModel)]="patient.firstName" name="usern">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                            <mat-form-field class="example-full-width">
+                                                                <input matInput placeholder="Last Name"  [(ngModel)]="patient.lastName" name="last">
+                                                            </mat-form-field>
+                                                    </div>
+                                                   
+                                                </div>
+                                                <div class="row">
+                                                        Allergy
+                                                        <div class="col-md-3">
+                                                                <p *ngFor="let al of patient.listOfAllergy">
+                                                                  <span *ngIf="al.ingredient!=null">{{al.ingredient.name}}</span> 
+                                                                  <span *ngIf="al.medicine!=null">{{al.medicine.name}}</span> 
+                                                                  <i class="material-icons" (click)="remove(al)">close</i> </p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                                <mat-form-field class="example-full-width" >
+                                                                        <mat-select placeholder="ingredients" name="ing" [(ngModel)]="selectedIngredient" >
+                                                                            <mat-option *ngFor="let ingr of ingredients" [value]="ingr" >{{ingr.name}}</mat-option>
+                                                                        </mat-select>    
+                                                                    </mat-form-field>
+                                                                    <button mat-raised-button  class="btn btn-info pull-right" (click)="addIgn()" >Add </button>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <mat-form-field class="example-full-width" >
+                                                                    <mat-select placeholder="medicines" name="med" [(ngModel)]="selectedMedicine" >
+                                                                        <mat-option *ngFor="let med of medicines" [value]="med" >{{med.name}}</mat-option>
+                                                                    </mat-select>    
+                                                                </mat-form-field>
+                                                                <button mat-raised-button  class="btn btn-info pull-right" (click)="addMedicine()" >Add </button>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="savePatient()">Save</button>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                          Or find patient without doctor
+                                            <form action="save()">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <mat-form-field class="example-full-width" >
+                                                            <mat-select placeholder="patiens" name="pa" [(ngModel)]="selectedPatient" >
+                                                                <mat-option *ngFor="let pat of patients_dr" [value]="pat" >{{pat.firstName}} {{pat.lastName}}</mat-option>
+                                                            </mat-select>    
+                                                        </mat-form-field>
+                                                        <button mat-raised-button  class="btn btn-info pull-right" (click)="addPat()" >Add </button>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <button mat-raised-button  class="btn btn-info pull-right" (click)="goToTab(1)" >Back</button>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane active" *ngSwitchCase="4">
+                                    <div class="card">
+                                        <div class="card-header card-header-info">
+                                            <h4 class="card-title">New examination</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="saveEx()">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <mat-form-field class="example-full-width" >
+                                                            <mat-select placeholder="Patient" name="pat" [(ngModel)]="examination.patient" >
+                                                                <mat-option *ngFor="let pat of patients" [value]="pat" >{{pat.firstName}} {{pat.lastName}}</mat-option>
+                                                            </mat-select>    
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+
+                                                        <div class="col-md-12">
+                                                                <mat-form-field class="example-full-width">
+                                                                    <input matInput placeholder="Temperature"  [(ngModel)]="examination.temperature" name="temp">
+                                                                </mat-form-field>
+                                                                <p *ngFor="let symp of examination.sympom">
+                                                                    <mat-checkbox name="check" [(ngModel)]="symp.value">{{symp.symptom.name}}</mat-checkbox>  
+                                                                </p>
+                                                        </div>
+                                                    
+                                                </div>
+                                                <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="saveEx()">Save</button>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane active" *ngSwitchCase="5">
+                                        <div class="card">
+                                           
+                                            <div class="card-body">
+                                                    <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="goToTab(6)">Own diagnosis</button>
+                                                    <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="goToTab(7)">Resoner</button>
+                                                    <div class="clearfix"></div>
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane active" *ngSwitchCase="6">
+                                            <div class="card">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title">Diagnosis</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form action="saveDiagnosis()">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <mat-form-field class="example-full-width" >
+                                                                    <mat-select placeholder="Disease" name="dis" [(ngModel)]="examination.diagnosis.disease" >
+                                                                        <mat-option *ngFor="let d of diseases" [value]="d" >{{d.name}}</mat-option>
+                                                                    </mat-select>    
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                    <mat-checkbox name="check" [(ngModel)]="examination.diagnosis.operation">Need an operation?</mat-checkbox> 
+                                                                </div>
+                                                        </div>
+                                                        <div class="row">
+                                                                Medicines:
+                                                                <div class="col-md-6">
+                                                                        
+                                                                        <p *ngFor="let med of examination.diagnosis.medicines">
+                                                                            {{med.name}}
+                                                                            <i class="material-icons" (click)="removeMed(med)">close</i>
+                                                                        </p>
+                                                                        <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="check()">Check Allergy</button>
+                                                        
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                        <mat-form-field class="example-full-width" >
+                                                                                <mat-select placeholder="Medicines" name="med" [(ngModel)]="selectedMedicine" >
+                                                                                    <mat-option *ngFor="let m of medicines" [value]="m" >{{m.name}}</mat-option>
+                                                                                </mat-select>    
+                                                                            </mat-form-field>
+                                                                            <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="add()">Add</button>
+                                                        
+                                                                </div>
+                                                            
+                                                        </div>
+                                                        <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="saveDiagnosis()">Save</button>
+                                                        <div class="clearfix"></div>
+                                                    </form>
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" *ngSwitchCase="7">
+                                                <div class="card">
+                                                    <div class="card-header card-header-info">
+                                                        <h4 class="card-title">Diagnosis</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <form action="saveDiagnosis()">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <mat-form-field class="example-full-width" >
+                                                                        <input matInput disabled placeholder="Disease" name="dis" [(ngModel)]="examination.diagnosis.disease.name" >
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                        <mat-checkbox name="check" [(ngModel)]="examination.diagnosis.operation">Need an operation?</mat-checkbox> 
+                                                                    </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                    Medicines:
+                                                                    <div class="col-md-6">
+                                                                            
+                                                                            <p *ngFor="let med of examination.diagnosis.medicines">
+                                                                                {{med.name}}
+                                                                                <i class="material-icons" (click)="removeMed(med)">close</i>
+                                                                            </p>
+                                                                            <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="check()">Check Allergy</button>
+                                                            
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                            <mat-form-field class="example-full-width" >
+                                                                                    <mat-select placeholder="Medicines" name="med" [(ngModel)]="selectedMedicine" >
+                                                                                        <mat-option *ngFor="let m of medicines" [value]="m" >{{m.name}}</mat-option>
+                                                                                    </mat-select>    
+                                                                                </mat-form-field>
+                                                                                <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="add()">Add</button>
+                                                            
+                                                                    </div>
+                                                                
+                                                            </div>
+                                                            <button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="saveDiagnosis()">Save</button>
+                                                            <div class="clearfix"></div>
+                                                        </form>
+                                                      
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+            <!--                 nav pills -->
+          
+            <!--                 end nav pills -->
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,228 @@
+<div class="col-md-12">
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container">
+          <div class="navbar-translate">
+            <a class="navbar-brand" (click)="goToHome()">{{username}}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a (click)="goToDiseases()" class="nav-link">DISEASES</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToPatients()" class="nav-link">PATIENTS</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToMonitoring()" class="nav-link">Monitoring</a>
+                  </li>  
+                <li class="nav-item">
+                    <a (click)="goToReports()" class="nav-link">Reports</a>
+                  </li>  
+              <li class="nav-item">
+                <a (click)="logout()" class="nav-link">Log out</a>
+              </li>            
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+        <div class="section section-white">
+          <div class="container">
+                <div class="card">
+                        <div class="card-header card-header-tabs card-header-info">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <span class="nav-tabs-title">Reports:</span>
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="nav-item" *ngIf="active==1 || active==5">
+                                            <a mat-button class="nav-link active" (click)="goToTab(1)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Report 1
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active!=1 && active!=5">
+                                            <a mat-button class="nav-link" (click)="goToTab(1)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Report 1
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active==2 || active==6">
+                                            <a mat-button class="nav-link active" (click)="goToTab(2)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Report 2
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active!=2 && active!=6">
+                                            <a mat-button class="nav-link" (click)="goToTab(2)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Report 2
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active==3 || active==7">
+                                            <a mat-button class="nav-link active" (click)="goToTab(3)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Report 3
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" *ngIf="active!=3 && active!=7">
+                                            <a mat-button class="nav-link" (click)="goToTab(3)" data-toggle="tab">
+                                                <i class="material-icons">receipt</i> Report 3
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                    
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" [ngSwitch]="active">
+                            <div class="tab-content" >
+                                
+                                <div class="tab-pane active" *ngSwitchCase="1">
+                                        <br/>
+                                        <div class="col-md-12">
+                                            <div class="card card-plain">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title mt-0">List of patients with possible chronic illnesses </h4>
+                                                    <p class="card-category">Patient was 5 or more time sick with the same disease in the last 2 year. The sickness was not coldness and fever.</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead class="">
+                                                                <th>
+                                                                    ID
+                                                                </th>
+                                                                <th>
+                                                                    FirstName
+                                                                </th>
+                                                                <th>
+                                                                    Lastname
+                                                                </th>                                                                
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let p1 of patients_1">
+                                                                    <td>
+                                                                        {{p1.id}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{p1.firstName}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{p1.lastName}}
+                                                                    </td>
+                                                                   
+                                                                    
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="tab-pane active" *ngSwitchCase="2">
+                                        <br/>
+                                        <div class="col-md-12">
+                                            <div class="card card-plain">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title mt-0"> List of possible addicts </h4>
+                                                    <p class="card-category">Patient got 6 or more anagletics in last 6 months from 3 or more doctors</p>                                          
+                                                </div>
+                                                <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead class="">
+                                                                    <th>
+                                                                        ID
+                                                                    </th>
+                                                                    <th>
+                                                                        FirstName
+                                                                    </th>
+                                                                    <th>
+                                                                        Lastname
+                                                                    </th>                                                                
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let p1 of patients_2">
+                                                                        <td>
+                                                                            {{p1.id}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{p1.firstName}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{p1.lastName}}
+                                                                        </td>
+                                                                       
+                                                                        
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="tab-pane active" *ngSwitchCase="3">
+                                    <br/>
+                                        <div class="col-md-12">
+                                            <div class="card card-plain">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title mt-0"> List of patients with weakened immune systems</h4>
+                                                    <p class="card-category">Pacijent je lečen više od 10 puta u poslednjih 12 meseci od barem 2 različite bolesti za koje su mu
+                                                        prepisani antibiotici</p>
+                                             
+                                                </div>
+                                                <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead class="">
+                                                                    <th>
+                                                                        ID
+                                                                    </th>
+                                                                    <th>
+                                                                        FirstName
+                                                                    </th>
+                                                                    <th>
+                                                                        Lastname
+                                                                    </th>                                                                
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let p1 of patients_3">
+                                                                        <td>
+                                                                            {{p1.id}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{p1.firstName}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{p1.lastName}}
+                                                                        </td>
+                                                                       
+                                                                        
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            <!--                 nav pills -->
+          
+            <!--                 end nav pills -->
+          </div>
+        </div>
+      </div>

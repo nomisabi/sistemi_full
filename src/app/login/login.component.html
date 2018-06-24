@@ -1,0 +1,50 @@
+ <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="section section-signup page-header" style="background-image: url('assets/img/city.jpg');">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 ml-auto mr-auto">
+            <div class="card card-signup">
+              <form class="form" [formGroup]="complexForm" name="form" (ngSubmit)="login()" >
+                <div class="card-header card-header-primary text-center">
+                  <h4>Login</h4>
+                </div>
+                <div class="card-body">
+                  <div class="input-group"  [ngClass]="{'has-error':!complexForm.controls['username'].valid && complexForm.controls['username'].touched}">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">face</i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username..." [(ngModel)]="user.username"  name="username" [formControl]="complexForm.controls['username']" required autofocus >
+                  </div>
+                  <div class="input-group" [ngClass]="{'has-error':!complexForm.controls['password'].valid && complexForm.controls['password'].touched}">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Password..." [(ngModel)]="user.password" name="password" [formControl]="complexForm.controls['password']" required>
+                  </div>
+                  <!-- If you want to add a checkbox to this form, uncomment this code
+
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="">
+                        Subscribe to newsletter
+                        <span class="form-check-sign">
+                            <span class="check"></span>
+                        </span>
+                    </label>
+                </div> -->
+                </div>
+                <div class="card-footer justify-content-center">
+                    <button class="btn btn-link btn-primary btn-lg" type="submit" [disabled]="!complexForm.valid"><i class="fa fa-lock"></i> SIGN IN</button>
+<!--                  <a class="btn btn-link btn-primary btn-lg" (click)="login()" >Login</a> -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
